@@ -1,6 +1,12 @@
 require('dotenv').config(); // Importer la configuration de dotenv
+
+const swaggerJSDoc = require('swagger-jsdoc');
 const connection = require('./utils/database'); // Importer la connexion à la base de données
 const express = require('express'); // Importer le framework Express
+
+const swaggerUI = require('swagger-ui-express'); // Importer Swagger UI
+const swaggerJsDoc = require('swagger-jsdoc'); // Importer Swagger JS Doc
+
 const port = process.env.PORT; // Port du serveur
 
 // Créer une application Express
