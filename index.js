@@ -15,14 +15,7 @@ const app = express();
 // Middleware pour parser les requêtes de type application/json
 app.use(express.json());
 
-// Vérifier la connexion à la base de données
-connection.connect((err) => {
-  if (err) {
-    console.error('Erreur de connexion à la base de données: ' + err.stack);
-    return;
-  }
-  console.log('Connecté à la base de données !');
-});
+
 
 
 // Vérifier si la connexion est active
@@ -35,32 +28,9 @@ app.listen(port, () => {
 // Définir la route par défaut
 app.get('/', (req, res) => {
   const welcome = {
-    message: "Bienvenue sur notre API en Node JS !",
+    message: "Test Quentin !",
   };
   res.json(welcome);
-});
-
-// Récupérer tous les messages
-app.get('/ObtenirListeMessages', (req, res) => {
-  connection.query('SELECT * FROM messages', (err, results) => {
-    if (err) {
-      res.status(500).send('Erreur lors de la récupération des messages');
-    } else {
-      res.json(results);
-    }
-  });
-});
-
-// Ajouter un message
-app.post('/AjouterMessage', (req, res) => {
-  const content = req.body.content;
-  connection.query('INSERT INTO messages (content) VALUES (?)', [content], (err) => {
-    if (err) {
-      res.status(500).send('Erreur lors de l\'ajout du message');
-    } else {
-      res.status(201).send('Message ajouté avec succès');
-    }
-  });
 });
 
 
