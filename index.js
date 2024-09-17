@@ -1,7 +1,6 @@
 require('dotenv').config(); // Importer la configuration de dotenv
 
 const swaggerJSDoc = require('swagger-jsdoc');
-const connection = require('./utils/database'); // Importer la connexion à la base de données
 const express = require('express'); // Importer le framework Express
 
 const swaggerUI = require('swagger-ui-express'); // Importer Swagger UI
@@ -28,7 +27,7 @@ app.listen(port, () => {
 // Définir la route par défaut
 app.get('/', (req, res) => {
   const welcome = {
-    message: "Test Quentin 5 !",
+    message: "Test Quentin 6 !",
   };
   res.json(welcome);
 });
