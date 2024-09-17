@@ -22,6 +22,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no deploy_schluter@51.222.29.128 '
             cd /var/www/shluter-systems-api &&
+            git stash &&
             git pull &&
             npm install --production &&
             pm2 restart all
