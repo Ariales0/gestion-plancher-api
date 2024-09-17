@@ -6,7 +6,7 @@ const express = require('express'); // Importer le framework Express
 const swaggerUI = require('swagger-ui-express'); // Importer Swagger UI
 const swaggerJsDoc = require('swagger-jsdoc'); // Importer Swagger JS Doc
 
-const port = process.env.PORT; // Port du serveur
+const port = 3000; // Port du serveur
 
 // Créer une application Express
 const app = express();
@@ -27,7 +27,7 @@ app.listen(port, () => {
 // Définir la route par défaut
 app.get('/', (req, res) => {
   const welcome = {
-    message: "Test Quentin 7!",
+    message: "Test Quentin 8 !",
   };
   res.json(welcome);
 });
