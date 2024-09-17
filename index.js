@@ -27,7 +27,7 @@ app.listen(port, () => {
 // Définir la route par défaut
 app.get('/', (req, res) => {
   const welcome = {
-    message: "Test Quentin 6 !",
+    message: "Test Quentin 7!",
   };
   res.json(welcome);
 });
