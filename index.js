@@ -1,21 +1,26 @@
 // <----------- Section importation ------------->
-// === Importer le module dotenv ===
-require("dotenv").config();
-// === Importer Express ===
-const express = require("express");
-// === Importer la connexion à la base de données ===
-const sequelize = require("./utils/database");
-
+require("dotenv").config(); // Importation du module dotenv
+const express = require("express"); // Importation du module express
+const sequelize = require("./config/db"); // Importation de la connexion à la base de données
+const User = require("./models/user");  // Importation du modèle User
 
 
 // <----------- Section configuration ------------->
-// === Configuration du port ===
-const port = process.env.PORT;
-// === Créer une application Express ===
-const app = express();
-// === Middleware pour parser le JSON ===
-app.use(express.json());
+const port = process.env.PORT;  // Récupération du port du serveur
+const app = express();  // Création de l'application express
+app.use(express.json());  // Utilisation du middleware pour comprendre les requêtes en JSON
 
+
+// <-----------Section base de données------------->
+// === Authentification et Synchronisation à la base de données ===
+sequelize.authenticate().then(() => {
+  console.log("Connexion à la base de données réussie !");
+  return sequelize.sync({ force: false });  // Force: false pour ne pas écraser les données
+}).then(() => {
+  console.log("Synchronisation des modèles réussie !");
+}).catch((error) => {
+  console.error("Impossible de se connecter à la base de données:", error);
+});
 
 
 // <----------- Section API ------------->
@@ -23,6 +28,8 @@ app.use(express.json());
 app.listen(port, () => {
   console.log(`L'API est en ligne !`);
 });
+
+
 // === Route de bienvenue ===
 app.get("/", (req, res) => {
   const welcome = {
@@ -30,16 +37,3 @@ app.get("/", (req, res) => {
   };
   res.json(welcome);
 });
-
-
-
-// <-----------Section base de données------------->
-// === Authentification à la base de données ===
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log("Connection successful.");
-  })
-  .catch((err) => {
-    console.error("Unable to connect to the database:", err);
-  });
