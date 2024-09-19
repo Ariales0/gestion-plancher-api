@@ -2,7 +2,7 @@
 require("dotenv").config(); // Importation du module dotenv
 const express = require("express"); // Importation du module express
 const sequelize = require("./config/db"); // Importation de la connexion à la base de données
-const User = require("./models/user");  // Importation du modèle User
+const userRoutes = require("./routes/userRoutes");  // Importation des routes utilisateur
 
 
 // <----------- Section configuration ------------->
@@ -37,3 +37,8 @@ app.get("/", (req, res) => {
   };
   res.json(welcome);
 });
+
+
+// <----------- Section des routes ------------->
+app.use("/users", userRoutes); // Routes pour les utilisateurs
+
