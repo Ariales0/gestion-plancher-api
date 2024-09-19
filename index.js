@@ -30,6 +30,7 @@ app.listen(port, () => {
 });
 
 
+// <----------- Section des routes ------------->
 // === Route de bienvenue ===
 app.get("/", (req, res) => {
   const welcome = {
@@ -38,7 +39,6 @@ app.get("/", (req, res) => {
   res.json(welcome);
 });
 
-
-// <----------- Section des routes ------------->
-app.use("/users", userRoutes); // Routes pour les utilisateurs
+// === Routes utilisateur ===
+app.use("/users", userRoutes); 
 
