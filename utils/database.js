@@ -1,13 +1,24 @@
-const mysql = require('mysql2');
+//<------------------ Database Connection ------------------->
+// === Importer le dotenv ===
+require("dotenv").config();
+// === Importer le module Sequelize ===
+const { Sequelize } = require("sequelize");
 
-// Connexion à la base de données
-const connection = mysql.createConnection({
+
+
+// === Créer une instance de Sequelize ===
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASS,
+  {
     host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
     port: process.env.DB_PORT,
-});
+    dialect: process.env.DB_DIALECT,
+  }
+);
 
-// Exporter la connexion
-module.exports = connection;
+
+
+// === Exporter la connexion à la base de données ===
+module.exports = sequelize;

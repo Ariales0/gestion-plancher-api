@@ -1,39 +1,30 @@
-require('dotenv').config(); // Importer la configuration de dotenv
+// <----------- Section importation ------------->
+// === Importer le module dotenv ===
+require("dotenv").config();
+// === Importer Express ===
+const express = require("express");
+// === Importer la connexion à la base de données ===
+const sequelize = require("./utils/database");
 
-const swaggerJSDoc = require('swagger-jsdoc');
-const connection = require('./utils/database'); // Importer la connexion à la base de données
-const express = require('express'); // Importer le framework Express
 
-const swaggerUI = require('swagger-ui-express'); // Importer Swagger UI
-const swaggerJsDoc = require('swagger-jsdoc'); // Importer Swagger JS Doc
 
-const port = process.env.PORT; // Port du serveur
-
-// Créer une application Express
+// <----------- Section configuration ------------->
+// === Configuration du port ===
+const port = process.env.PORT;
+// === Créer une application Express ===
 const app = express();
-
-// Middleware pour parser les requêtes de type application/json
+// === Middleware pour parser le JSON ===
 app.use(express.json());
 
-// Vérifier la connexion à la base de données
-connection.connect((err) => {
-  if (err) {
-    console.error('Erreur de connexion à la base de données: ' + err.stack);
-    return;
-  }
-  console.log('Connecté à la base de données !');
-});
 
 
-// Vérifier si la connexion est active
+// <----------- Section API ------------->
+// === Démarrer le serveur ===
 app.listen(port, () => {
   console.log(`L'API est en ligne !`);
 });
-
-
-
-// Définir la route par défaut
-app.get('/', (req, res) => {
+// === Route de bienvenue ===
+app.get("/", (req, res) => {
   const welcome = {
     message: "Bienvenue sur notre API en Node JS !",
   };
@@ -42,8 +33,13 @@ app.get('/', (req, res) => {
 
 
 
-
-
-
-
-
+// <-----------Section base de données------------->
+// === Authentification à la base de données ===
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Connection successful.");
+  })
+  .catch((err) => {
+    console.error("Unable to connect to the database:", err);
+  });
