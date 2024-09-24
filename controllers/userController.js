@@ -7,37 +7,75 @@ const User = require("../models/user"); // Importation du modèle User
 exports.register = async function (req, res) {
     try {
         // Récupération des données de la requête (body vu que c'est un POST)
-        const { name, email, password } = req.body;
+        const {
+            FirstName,
+            LastName,
+            Address,
+            City,
+            State,
+            Zip,
+            Country,
+            Email,
+            Password,
+        } = req.body;
 
         // Vérifier si l'utilisateur existe déjà (pour l'instant on vérifie juste l'email)
-        const existingUser  = await User.findOne({ where: { email } });
+        const existingUser  = await User.findOne({ where: { Email } });
         if (existingUser) {
             return res.status(400).json({ error: "Cet utilisateur existe déjà !" });
         }
 
         // Cryptage du mot de passe avant de l'enregistrer
-        const hashedPassword = await bycrypt.hash(password, 10);
+        const hashedPassword = await bycrypt.hash(Password, 10);
 
         // Création d'un nouvel utilisateur dans la base de données
         const newUser = await User.create({
-            name,
-            email,
-            password: hashedPassword,
+            FirstName,
+            LastName,
+            Address,
+            City,
+            State,
+            Zip,
+            Country,
+            Email,
+            Password: hashedPassword,
         });
 
-        // Réponse de succès sans renvoyer le mot de passe de l'utilisateur
-        res.status(201).json({
-            message: "Utilisateur créé avec succès !",
-            user :{
-                id: newUser.id,
-                name: newUser.name,
-                email: newUser.email,
-            }
-        }); 
+        // Réponse de succès création de l'utilisateur
+        res.status(201).json({message: "Utilisateur créé avec succès !"}); 
     }
     // Erreur lors de la création de l'utilisateur 
     catch (error) {
-        console.error("Erreur lors de la création de l'utilisateur:", error);
         res.status(500).json({ message: "Erreur de l'enregistrement utilisateur" });
     }
 };
+
+// <------------------ Fonction connexion d'un utilisateur ------------------->
+exports.login = async function (req, res) {
+    try {
+        // Récupération des données de la requête (body vu que c'est un POST)
+        const { Email, Password } = req.body;
+
+        // Recherche de l'utilisateur dans la base de données
+        const user = await User.findOne({ where: { Email } });
+        if (!user) {
+            return res.status(400).json({ error: "L'utilisateur n'existe pas !" });
+        }
+
+        // Vérification du mot de passe de l'utilisateur avec celui enregistré dans la BD (bcrypt compare les deux)
+        const validPassword = await bycrypt.compare(Password, user.Password);
+        if (!validPassword) {
+            return res.status(400).json({ error: "Mot de passe incorrect !" });
+        }
+
+        // Réponse de succès connexion de l'utilisateur
+        res.status(200).json({ message: "Connexion réussie !" });
+    }
+    // Erreur lors de la connexion de l'utilisateur 
+    catch (error) {
+        res.status(500).json({ message: "Erreur de connexion utilisateur" });
+    }
+};
+
+
+

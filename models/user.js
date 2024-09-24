@@ -4,23 +4,47 @@ const sequelize = require("../config/db");
 
 
 // === Créer le modèle de la table "users" ===
-const User = sequelize.define("users", {
-    id: {
+const User = sequelize.define("Users", {
+    UserId: {
       type: sequelize.Sequelize.INTEGER,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true,
     },
-    name: {
-      type: sequelize.Sequelize.STRING,
+    FirstName: {
+      type: sequelize.Sequelize.STRING(50),
       allowNull: false,
     },
-    email: {
-      type: sequelize.Sequelize.STRING,
+    LastName: {
+      type: sequelize.Sequelize.STRING(50),
       allowNull: false,
     },
-    password: {
-      type: sequelize.Sequelize.STRING,
+    Address: {
+      type: sequelize.Sequelize.STRING(150),
+      allowNull: false,
+    },
+    City: {
+      type: sequelize.Sequelize.STRING(70),
+      allowNull: false,
+    },
+    State: {
+      type: sequelize.Sequelize.STRING(30),
+      allowNull: false,
+    },
+    Zip: {
+      type: sequelize.Sequelize.STRING(7),
+      allowNull: false,
+    },
+    Country: {
+      type: sequelize.Sequelize.STRING(30),
+      allowNull: false,
+    },
+    Email: {
+      type: sequelize.Sequelize.STRING(200),
+      allowNull: false,
+    },
+    Password: {
+      type: sequelize.Sequelize.STRING(255),
       allowNull: false,
     },
 });

@@ -12,12 +12,9 @@ app.use(express.json());  // Utilisation du middleware pour comprendre les requ�
 
 
 // <-----------Section base de données------------->
-// === Authentification et Synchronisation à la base de données ===
+// === Authentification à la base de données ===
 sequelize.authenticate().then(() => {
   console.log("Connexion à la base de données réussie !");
-  return sequelize.sync({ force: false });  // Force: false pour ne pas écraser les données
-}).then(() => {
-  console.log("Synchronisation des modèles réussie !");
 }).catch((error) => {
   console.error("Impossible de se connecter à la base de données:", error);
 });
@@ -30,7 +27,7 @@ app.listen(port, () => {
 });
 
 
-// <----------- Section des routes ------------->
+// <----------- Section routes ------------->
 // === Route de bienvenue ===
 app.get("/", (req, res) => {
   const welcome = {
