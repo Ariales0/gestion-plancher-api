@@ -15,11 +15,10 @@
  */
 
 //<------------------ Section importation ------------------->
-require("dotenv").config(); // Importation du module dotenv
 const { Sequelize } = require("sequelize"); // Importation du module sequelize
 
 //<------------------ Section configuration ------------------->
-// === Créer une instance de Sequelize ===
+// === Création de la connexion à la base de données ===
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,

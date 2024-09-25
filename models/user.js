@@ -14,55 +14,59 @@
  * ============================================================================
  */
 
-// <------------------ Modele User ------------------->
-// === Importer le module Sequelize ===
-const sequelize = require("../config/db");
+// <------------------ Section Importation ------------------->
+const sequelize = require("../config/db"); // Importation de la connexion à la base de données
+const { DataTypes } = require("sequelize"); // Importation du DataTypes de sequelize (facilitant la création de modèles)
 
-// === Créer le modèle de la table "users" ===
+// <------------------ Création du modèle User ------------------->
 const User = sequelize.define("Users", {
   UserId: {
-    type: sequelize.Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true,
   },
   FirstName: {
-    type: sequelize.Sequelize.STRING(50),
+    type: DataTypes.STRING(50),
     allowNull: false,
   },
   LastName: {
-    type: sequelize.Sequelize.STRING(50),
+    type: DataTypes.STRING(50),
     allowNull: false,
   },
   Address: {
-    type: sequelize.Sequelize.STRING(150),
+    type: DataTypes.STRING(150),
     allowNull: false,
   },
   City: {
-    type: sequelize.Sequelize.STRING(70),
+    type: DataTypes.STRING(70),
     allowNull: false,
   },
   State: {
-    type: sequelize.Sequelize.STRING(30),
+    type: DataTypes.STRING(30),
     allowNull: false,
   },
   Zip: {
-    type: sequelize.Sequelize.STRING(7),
+    type: DataTypes.STRING(7),
     allowNull: false,
   },
   Country: {
-    type: sequelize.Sequelize.STRING(30),
+    type: DataTypes.STRING(30),
     allowNull: false,
   },
   Email: {
-    type: sequelize.Sequelize.STRING(200),
+    type: DataTypes.STRING(200),
     allowNull: false,
+    unique: true, // Vérifier si l'email est unique
+    validate: {
+      isEmail: true, // Vérifier si l'email est valide (format)
+    },
   },
   Password: {
-    type: sequelize.Sequelize.STRING(255),
+    type: DataTypes.STRING(255),
     allowNull: false,
   },
 });
 
-// === Exporter le modèle User ===
+// <------------------ Exportation du modèle User ------------------->
 module.exports = User;

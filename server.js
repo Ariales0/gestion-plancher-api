@@ -26,13 +26,10 @@ const app = express(); // Création de l'application express
 app.use(express.json()); // Utilisation du middleware pour comprendre les requêtes en JSON
 
 // <-----------Section base de données------------->
-// === Authentification à la base de données ===
-sequelize
-  .authenticate()
-  .then(() => {
+// === Tester la connexion à la base de données ===
+sequelize.authenticate().then(() => {
     console.log("Connexion à la base de données réussie !");
-  })
-  .catch((error) => {
+  }).catch((error) => {
     console.error("Impossible de se connecter à la base de données:", error);
   });
 
