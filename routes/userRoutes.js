@@ -26,5 +26,8 @@ router.post("/register", userController.register);
 // === Route de connexion d'un utilisateur ===
 router.post("/login", userController.login);
 
+// === Route de déconnexion d'un utilisateur ===
+router.post("/logout", userController.logout);
+
 // <------------------ Exportation du module ------------------->
 module.exports = router;
