@@ -1,17 +1,32 @@
-//  Rest API Ag360Api
-//  Version 1.0 (Lyes Hamrani)
-//  Plug-IN : vscode-restclient (Huachao)
-//  https://github.com/Huachao/vscode-restclient
-
 @hostname = localhost
-
 @port = 3001
-
 @host = {{hostname}}:{{port}}
-
 @contentType = application/json
 
+### Route par défaut de l'API
 GET  http://{{host}}/
 
+### Requête d'inscription
+POST http://{{host}}/users/register
+Content-Type: {{contentType}}
 
+{
+  "FirstName": "John",
+  "LastName": "Doe",
+  "Address": "123 Main St",
+  "City": "Anytown",
+  "State": "CA",
+  "Zip": "12345",
+  "Country": "USA",
+  "Email": "john.dan@example.com",
+  "Password": "securePassword123"
+}
 
+### Requête de connexion
+POST http://{{host}}/users/login
+Content-Type: {{contentType}}
+
+{
+  "Email": "john.dan@example.com",
+  "Password": "securePassword123"
+}
