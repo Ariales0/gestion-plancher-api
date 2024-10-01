@@ -12,3 +12,6 @@
 @contentType = application/json
 
 GET  http://{{host}}/
+
+
+
