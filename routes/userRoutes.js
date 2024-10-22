@@ -108,5 +108,6 @@ router.post("/login", userController.login);
  */
 router.post("/logout", userController.logout);
 
+
 // <------------------ Exportation du module ------------------->
 module.exports = router;

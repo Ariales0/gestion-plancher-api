@@ -61,7 +61,7 @@ exports.register = async function (req, res) {
     res.status(201).json({ message: "Utilisateur créé avec succès !" });
   } catch (error) {
     // Erreur lors de la création de l'utilisateur
-    res.status(500).json({ message: "Erreur de l'enregistrement utilisateur" });
+    res.status(500).json({ message: "Erreur de l'enregistrement utilisateur", error: error.message });
   }
 };
 

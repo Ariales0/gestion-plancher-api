@@ -26,7 +26,7 @@ const expiresIn = process.env.ACCESS_TOKEN_LIFE;
 module.exports = {
   // === Génération du token ===
   generateAccessToken: function (user) {
-    return jwt.sign({ id: user.id, email: user.email }, accessSecretKey, {
+    return jwt.sign({ id: user.id, role: user.role }, accessSecretKey, {
       expiresIn: expiresIn,
     });
   },

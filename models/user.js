@@ -66,6 +66,16 @@ const User = sequelize.define("Users", {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
+  Role: {
+    type: DataTypes.STRING(20),
+    allowNull: false,
+    defaultValue: "Admin",
+  },
+  Etat: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: true,
+  },
 });
 
 // <------------------ Exportation du modèle User ------------------->

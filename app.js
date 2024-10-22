@@ -42,7 +42,7 @@ sequelize
 // <----------- Section API ------------->
 // === Démarrer le serveur ===
 app.listen(port, () => {
-  console.log(`L'API est en ligne !`);
+  console.log(`Le serveur est en ligne sur l'adresse http://localhost:${port}`);
 });
 
 // <----------- Section swagger ------------->
@@ -53,7 +53,7 @@ const swaggerOptions = {
     info: {
       title: "API Gestion Plancher",
       version: "1.0.0",
-      description: "API pour la gestion des planchers",
+      description: "API principale pour la gestion des planchers",
       contact: {
         name: "Melyos",
         email: "melyos@shultersys.org",
@@ -77,10 +77,7 @@ if (environment === "development") {
 // <----------- Section routes ------------->
 // === Route de bienvenue ===
 app.get("/", (req, res) => {
-  const welcome = {
-    message: "Bienvenue sur notre API en Node JS !",
-  };
-  res.json(welcome);
+  res.json("API principale pour la gestion des planchers");
 });
 
 // === Routes utilisateur ===
