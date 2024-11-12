@@ -17,7 +17,7 @@
 // <----------- Section importation ------------->
 require("dotenv").config(); // Importation du module dotenv
 const express = require("express"); // Importation du module express
-const sequelize = require("./config/db"); // Importation de la connexion à la base de données
+const sequelize = require("./config/dbConfig"); // Importation de la connexion à la base de données
 const userRoutes = require("./routes/userRoutes"); // Importation des routes utilisateur
 const swaggerJSDoc = require("swagger-jsdoc"); // Importation du module swagger-jsdoc
 const swaggerUi = require("swagger-ui-express"); // Importation du module swagger-ui-express

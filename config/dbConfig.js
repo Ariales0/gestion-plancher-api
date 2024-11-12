@@ -15,7 +15,7 @@
  */
 
 //<------------------ Section importation ------------------->
-const { Sequelize } = require("sequelize"); // Importation du module sequelize
+const { Sequelize, DataTypes } = require("sequelize"); // Importation du module sequelize
 
 //<------------------ Section configuration ------------------->
 // === Création de la connexion à la base de données ===

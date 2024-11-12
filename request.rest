@@ -1,5 +1,5 @@
 @hostname = localhost
-@port = 3001
+@port = 5000
 @host = {{hostname}}:{{port}}
 @contentType = application/json
 
@@ -9,7 +9,6 @@ GET  http://{{host}}/
 ### Requête d'inscription
 POST http://{{host}}/users/register
 Content-Type: {{contentType}}
-
 {
   "FirstName": "John",
   "LastName": "Doe",
@@ -18,8 +17,8 @@ Content-Type: {{contentType}}
   "State": "CA",
   "Zip": "12345",
   "Country": "USA",
-  "Email": "john.dan@example.com",
-  "Password": "securePassword123"
+  "Email": "test@example.com",
+  "Password": "test"
 }
 
 ### Requête de connexion

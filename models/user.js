@@ -15,67 +15,79 @@
  */
 
 // <------------------ Section Importation ------------------->
-const sequelize = require("../config/db"); // Importation de la connexion à la base de données
-const { DataTypes } = require("sequelize"); // Importation du DataTypes de sequelize (facilitant la création de modèles)
+const sequelize = require("../config/dbConfig"); // Importation de la connexion à la base de données
+const { DataTypes } = require("sequelize"); // Importation du module sequelize
 
 // <------------------ Création du modèle User ------------------->
 const User = sequelize.define("Users", {
   UserId: {
-    type: DataTypes.INTEGER,
     autoIncrement: true,
+    type: DataTypes.INTEGER,
     allowNull: false,
-    primaryKey: true,
+    primaryKey: true
+  },
+  Status: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
   },
   FirstName: {
     type: DataTypes.STRING(50),
-    allowNull: false,
+    allowNull: false
   },
   LastName: {
     type: DataTypes.STRING(50),
-    allowNull: false,
+    allowNull: false
   },
   Address: {
     type: DataTypes.STRING(150),
-    allowNull: false,
+    allowNull: false
   },
   City: {
     type: DataTypes.STRING(70),
-    allowNull: false,
+    allowNull: false
   },
   State: {
     type: DataTypes.STRING(30),
-    allowNull: false,
+    allowNull: false
   },
   Zip: {
     type: DataTypes.STRING(7),
-    allowNull: false,
+    allowNull: false
   },
   Country: {
     type: DataTypes.STRING(30),
-    allowNull: false,
+    allowNull: false
   },
   Email: {
-    type: DataTypes.STRING(200),
+    type: DataTypes.STRING(100),
     allowNull: false,
-    unique: true, // Vérifier si l'email est unique
-    validate: {
-      isEmail: true, // Vérifier si l'email est valide (format)
-    },
+    unique: "Email"
   },
   Password: {
     type: DataTypes.STRING(255),
-    allowNull: false,
-  },
-  Role: {
-    type: DataTypes.STRING(20),
-    allowNull: false,
-    defaultValue: "Admin",
-  },
-  Etat: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: true,
-  },
+    allowNull: false
+  }, 
+}, {
+  sequelize,
+  tableName: "users",
+  indexes: [
+    {
+      name: "PRIMARY",
+      unique: true,
+      using: "BTREE",
+      fields: [
+        { name: "UserId" },
+      ]
+    },
+    {
+      name: "Email",
+      unique: true,
+      using: "BTREE",
+      fields: [
+        { name: "Email" },
+      ]
+    },
+  ]
 });
 
 // <------------------ Exportation du modèle User ------------------->

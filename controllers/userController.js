@@ -17,7 +17,7 @@
 // <------------------ Importation des modules ------------------->
 const bycrypt = require("bcrypt"); // Importation du module bcrypt
 const User = require("../models/user"); // Importation du modèle User
-const jwt = require("../utils/jwt"); // Importation du module jwt
+const jwt = require("../utils/jwtUtil"); // Importation du module jwt
 
 // <------------------ Fonction création d'un utilisateur ------------------->
 exports.register = async function (req, res) {
@@ -46,6 +46,7 @@ exports.register = async function (req, res) {
 
     // Création d'un nouvel utilisateur dans la base de données
     const newUser = await User.create({
+      Status: true,
       FirstName,
       LastName,
       Address,
