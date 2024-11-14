@@ -35,24 +35,25 @@ const userController = require("../controllers/userController"); // Importation 
  *           schema:
  *             type: object
  *             properties:
- *               Firstname:
+ *               first_name:
  *                 type: string
- *               Lastname:
+ *               last_name:
  *                 type: string
- *               Address:
+ *               address:
  *                type: string
- *               City:
+ *               city:
  *                type: string
- *               State:
+ *               state:
  *                type: string
- *               Zip:
+ *               zip:
  *                type: string
- *               Country:
- *                type: string
- *               Email:
+ *               email:
  *                 type: string
- *               Password:
+ *               password:
  *                 type: string
+ *               type:
+ *                 type: string
+ *                 default: "user"
  *     responses:
  *       201:
  *         description: Utilisateur créé avec succès.
@@ -78,9 +79,9 @@ router.post("/register", userController.register);
  *           schema:
  *             type: object
  *             properties:
- *               Email:
+ *               email:
  *                 type: string
- *               Password:
+ *               password:
  *                 type: string
  *     responses:
  *       200:
@@ -107,7 +108,6 @@ router.post("/login", userController.login);
  *        description: Erreur de déconnexion utilisateur.
  */
 router.post("/logout", userController.logout);
-
 
 // <------------------ Exportation du module ------------------->
 module.exports = router;

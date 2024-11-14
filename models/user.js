@@ -26,10 +26,6 @@ const User = sequelize.define("users", {
     allowNull: false,
     primaryKey: true
   },
-  status: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false
-  },
   first_name: {
     type: DataTypes.STRING(50),
     allowNull: false
@@ -54,10 +50,6 @@ const User = sequelize.define("users", {
     type: DataTypes.STRING(7),
     allowNull: false
   },
-  country: {
-    type: DataTypes.STRING(30),
-    allowNull: false
-  },
   email: {
     type: DataTypes.STRING(100),
     allowNull: false,
@@ -67,6 +59,15 @@ const User = sequelize.define("users", {
     type: DataTypes.STRING(255),
     allowNull: false
   }, 
+  type: {
+    type: DataTypes.STRING(50),
+    allowNull: false,
+    defaultValue: "user"
+  },
+  status: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
+  },
 }, {
   sequelize,
   tableName: "users",

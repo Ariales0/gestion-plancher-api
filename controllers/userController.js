@@ -22,78 +22,64 @@ const jwt = require("../utils/jwtUtil"); // Importation du module jwt
 // <------------------ Fonction création d'un utilisateur ------------------->
 exports.register = async function (req, res) {
   try {
-    // Récupération des données de la requête (body vu que c'est un POST)
     const {
-      FirstName,
-      LastName,
-      Address,
-      City,
-      State,
-      Zip,
-      Country,
-      Email,
-      Password,
+      first_name,
+      last_name,
+      address,
+      city,
+      state,
+      zip,
+      email,
+      password,
+      type = "user"
     } = req.body;
-
-    // Vérifier si l'utilisateur existe déjà (pour l'instant on vérifie juste l'email)
-    const existingUser = await User.findOne({ where: { Email } });
+ 
+    const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ error: "Cet utilisateur existe déjà !" });
     }
-
-    // Cryptage du mot de passe avant de l'enregistrer
-    const hashedPassword = await bycrypt.hash(Password, 10);
-
-    // Création d'un nouvel utilisateur dans la base de données
+ 
+    const hashedPassword = await bycrypt.hash(password, 10);
+ 
     const newUser = await User.create({
-      Status: true,
-      FirstName,
-      LastName,
-      Address,
-      City,
-      State,
-      Zip,
-      Country,
-      Email,
-      Password: hashedPassword,
+      first_name,
+      last_name, 
+      address,
+      city,
+      state,
+      zip,
+      email,
+      password: hashedPassword,
+      type,
+      status: true
     });
-
-    // Réponse de succès création de l'utilisateur
+ 
     res.status(201).json({ message: "Utilisateur créé avec succès !" });
   } catch (error) {
-    // Erreur lors de la création de l'utilisateur
     res.status(500).json({ message: "Erreur de l'enregistrement utilisateur", error: error.message });
   }
-};
-
-// <------------------ Fonction connexion d'un utilisateur ------------------->
-exports.login = async function (req, res) {
+ };
+ 
+ exports.login = async function (req, res) {
   try {
-    // Récupération des données de la requête (body vu que c'est un POST)
-    const { Email, Password } = req.body;
-
-    // Recherche de l'utilisateur dans la base de données
-    const user = await User.findOne({ where: { Email } });
+    const { email, password } = req.body;
+ 
+    const user = await User.findOne({ where: { email } });
     if (!user) {
       return res.status(400).json({ error: "L'utilisateur n'existe pas !" });
     }
-
-    // Vérification du mot de passe de l'utilisateur avec celui enregistré dans la BD (bcrypt compare les deux)
-    const validPassword = await bycrypt.compare(Password, user.Password);
+ 
+    const validPassword = await bycrypt.compare(password, user.password);
     if (!validPassword) {
       return res.status(400).json({ error: "Mot de passe incorrect !" });
     }
-
-    // Réponse de succès connexion de l'utilisateur
+ 
     const accessToken = jwt.generateAccessToken(user);
-    res
-      .status(200)
-      .json({ message: "Connexion réussie !", token: accessToken });
+    res.status(200).json({ message: "Connexion réussie !", token: accessToken });
   } catch (error) {
-    // Erreur lors de la connexion de l'utilisateur
     res.status(500).json({ message: "Erreur de connexion utilisateur" });
   }
-};
+ };
 
 // <------------------ Fonction deconnexion d'un utilisateur ------------------->
 exports.logout = async function (req, res) {
