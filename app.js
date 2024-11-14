@@ -21,7 +21,7 @@ const sequelize = require("./config/dbConfig"); // Importation de la connexion �
 const userRoutes = require("./routes/userRoutes"); // Importation des routes utilisateur
 const swaggerJSDoc = require("swagger-jsdoc"); // Importation du module swagger-jsdoc
 const swaggerUi = require("swagger-ui-express"); // Importation du module swagger-ui-express
-
+const { initAssociations } = require("./models/association"); // Importation des associations
 // <----------- Section configuration ------------->
 const port = process.env.PORT; // Configuration du port
 const environment = process.env.NODE_ENV; // Configuration de l'environnement
@@ -34,6 +34,12 @@ sequelize
   .authenticate()
   .then(() => {
     console.log("Connexion à la base de données réussie !");
+    try {
+      initAssociations();
+      console.log("Associations initialisées !");
+    } catch (error) {
+      console.error("Impossible d'initialiser les associations:", error);
+    }
   })
   .catch((error) => {
     console.error("Impossible de se connecter à la base de données:", error);

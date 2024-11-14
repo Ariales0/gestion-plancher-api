@@ -19,51 +19,51 @@ const sequelize = require("../config/dbConfig"); // Importation de la connexion 
 const { DataTypes } = require("sequelize"); // Importation du module sequelize
 
 // <------------------ Création du modèle User ------------------->
-const User = sequelize.define("Users", {
-  UserId: {
+const User = sequelize.define("users", {
+  id: {
     autoIncrement: true,
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true
   },
-  Status: {
+  status: {
     type: DataTypes.BOOLEAN,
     allowNull: false
   },
-  FirstName: {
+  first_name: {
     type: DataTypes.STRING(50),
     allowNull: false
   },
-  LastName: {
+  last_name: {
     type: DataTypes.STRING(50),
     allowNull: false
   },
-  Address: {
+  address: {
     type: DataTypes.STRING(150),
     allowNull: false
   },
-  City: {
+  city: {
     type: DataTypes.STRING(70),
     allowNull: false
   },
-  State: {
+  state: {
     type: DataTypes.STRING(30),
     allowNull: false
   },
-  Zip: {
+  zip: {
     type: DataTypes.STRING(7),
     allowNull: false
   },
-  Country: {
+  country: {
     type: DataTypes.STRING(30),
     allowNull: false
   },
-  Email: {
+  email: {
     type: DataTypes.STRING(100),
     allowNull: false,
     unique: "Email"
   },
-  Password: {
+  password: {
     type: DataTypes.STRING(255),
     allowNull: false
   }, 
@@ -76,15 +76,15 @@ const User = sequelize.define("Users", {
       unique: true,
       using: "BTREE",
       fields: [
-        { name: "UserId" },
+        { name: "id" },
       ]
     },
     {
-      name: "Email",
+      name: "email",
       unique: true,
       using: "BTREE",
       fields: [
-        { name: "Email" },
+        { name: "email" },
       ]
     },
   ]
