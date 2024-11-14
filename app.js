@@ -19,9 +19,11 @@ require("dotenv").config(); // Importation du module dotenv
 const express = require("express"); // Importation du module express
 const sequelize = require("./config/dbConfig"); // Importation de la connexion à la base de données
 const userRoutes = require("./routes/userRoutes"); // Importation des routes utilisateur
+const brokerRoutes = require("./routes/brokerRoutes"); // Importation des routes broker
 const swaggerJSDoc = require("swagger-jsdoc"); // Importation du module swagger-jsdoc
 const swaggerUi = require("swagger-ui-express"); // Importation du module swagger-ui-express
 const { initAssociations } = require("./models/association"); // Importation des associations
+
 // <----------- Section configuration ------------->
 const port = process.env.PORT; // Configuration du port
 const environment = process.env.NODE_ENV; // Configuration de l'environnement
@@ -88,3 +90,6 @@ app.get("/", (req, res) => {
 
 // === Routes utilisateur ===
 app.use("/users", userRoutes);
+
+// === Routes broker ===
+app.use("/brokers", brokerRoutes);  
