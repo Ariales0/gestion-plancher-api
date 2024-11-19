@@ -54,11 +54,11 @@ DB_USER='utilisateur_BD'
 
 DB_PASS='mot_de_passe_bd'
 
-DB_NAME='chat'
+DB_NAME='test'
 
 DB_PORT=3306  # Exemple, spécifiez le port si nécessaire
 
-PORT=3000  # Exemple, spécifiez le port souhaité
+PORT=5000  # Exemple, spécifiez le port souhaité
 ```
 
 Remplacez les valeurs par celles qui correspondent à votre configuration.
@@ -75,11 +75,11 @@ npm start
 
 ## Utilisation
 
-Une fois l'API démarrée, vous pouvez envoyer des requêtes HTTP à `http://localhost:3000`
+Une fois l'API démarrée, vous pouvez envoyer des requêtes HTTP à `http://localhost:5000`
 
 ## Documentation de l'API
 
-Accéder à la documentation de l'api via `http://localhost:3000/api-docs`
+Accéder à la documentation de l'api via `http://localhost:5000/api-docs`
 
 ## Collaboration
 
