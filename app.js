@@ -20,6 +20,7 @@ const express = require("express"); // Importation du module express
 const sequelize = require("./config/dbConfig"); // Importation de la connexion à la base de données
 const userRoutes = require("./routes/userRoutes"); // Importation des routes utilisateur
 const brokerRoutes = require("./routes/brokerRoutes"); // Importation des routes broker
+const thermostatRoutes = require("./routes/thermostatRoutes"); // Importation des routes thermostat
 const swaggerJSDoc = require("swagger-jsdoc"); // Importation du module swagger-jsdoc
 const swaggerUi = require("swagger-ui-express"); // Importation du module swagger-ui-express
 const { initAssociations } = require("./models/association"); // Importation des associations
@@ -56,7 +57,7 @@ app.listen(port, () => {
 // <----------- Section swagger ------------->
 // === Configuration de la documentation swagger ===
 const swaggerOptions = {
-  definition: { 
+  definition: {
     openapi: "3.0.0",
     info: {
       title: "API Gestion Plancher",
@@ -69,11 +70,11 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: `http://localhost:${port}`, 
+        url: `http://localhost:${port}`,
       },
     ],
   },
-  apis: ["./routes/*.js"], 
+  apis: ["./routes/*.js"],
 };
 
 // === Afficher la documentation swagger en développement ===
@@ -92,4 +93,7 @@ app.get("/", (req, res) => {
 app.use("/users", userRoutes);
 
 // === Routes broker ===
-app.use("/brokers", brokerRoutes);  
+app.use("/brokers", brokerRoutes);
+
+// === Routes thermostat ===
+app.use("/thermostats", thermostatRoutes);

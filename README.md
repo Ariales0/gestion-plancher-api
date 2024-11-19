@@ -1,6 +1,6 @@
 # Gestion Plancher
 
-Ce projet est une API construite avec Node JS pour le projet WEB. Elle est toujours en cours de développement et sera améliorée tout au long du cours.
+Ce projet est une API construite avec Node JS, dans le cadre du cours programmation WEB avané. Elle est toujours en cours de développement et sera améliorée tout au long du cours.
 
 ## Équipe de développement
 
@@ -13,6 +13,8 @@ Ce projet est une API construite avec Node JS pour le projet WEB. Elle est toujo
 
 ## Prérequis
 
+Pour le bon fonctionnement du projet nous aurons besoin de :
+
 - Visual Studio Code (avec REST Client)
   
 - Git
@@ -23,6 +25,16 @@ Ce projet est une API construite avec Node JS pour le projet WEB. Elle est toujo
   
 - Postman
   
+
+## Dépendances
+
+Les diffirents packages utilisés dans la réalisation de l'API
+
+- Express.js
+- Sequelize ORM
+- JWT Authentication
+- Swagger Documentation
+- MySQL
 
 ## Instructions d'installation
 
@@ -47,18 +59,12 @@ Ce projet utilise des variables d'environnement pour la configuration. Créez un
 
 ```plaintext
 # Exemple, spécifiez l'URL de votre BDD
-
-DB_HOST='localhost' 
-
-DB_USER='utilisateur_BD'
-
-DB_PASS='mot_de_passe_bd'
-
-DB_NAME='test'
-
-DB_PORT=3306  # Exemple, spécifiez le port si nécessaire
-
-PORT=5000  # Exemple, spécifiez le port souhaité
+DB_HOST='localhost' # Mettre l'URL de la base de données
+DB_USER='utilisateur_BD' # Mettre le nom d'utilisateur pour la base de données
+DB_PASS='mot_de_passe_bd' # Mettre le mot de passe de la base de données
+DB_NAME='test' # Modifier selon le nom de la base de données
+DB_PORT=3306  # Exemple, spécifiez le port de la base de données si nécessaire
+PORT=5000  # Exemple, spécifiez le port souhaité pour démarrer l'API
 ```
 
 Remplacez les valeurs par celles qui correspondent à votre configuration.

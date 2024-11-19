@@ -21,101 +21,144 @@ const userController = require("../controllers/userController"); // Importation 
 
 // <------------------ Section Routes avec documentation swagger ------------------->
 /**
-* @swagger
-* components:
-*   schemas:
-*     User:
-*       type: object
-*       properties:
-*         first_name:
-*           type: string
-*         last_name:
-*           type: string
-*         address:
-*           type: string  
-*         city:
-*           type: string
-*         state:
-*           type: string
-*         zip:
-*           type: string
-*         email:
-*           type: string
-*         password:
-*           type: string
-*         type:
-*           type: string
-*           default: "user"
-*         status:
-*           type: boolean
-*           default: true
-*/
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         first_name:
+ *           type: string
+ *         last_name:
+ *           type: string
+ *         address:
+ *           type: string
+ *         city:
+ *           type: string
+ *         state:
+ *           type: string
+ *         zip:
+ *           type: string
+ *         email:
+ *           type: string
+ *         password:
+ *           type: string
+ *         type:
+ *           type: string
+ *           default: "user"
+ *         status:
+ *           type: boolean
+ *           default: true
+ */
 
 /**
-* @swagger
-* /users/register:
-*   post:
-*     tags: [Users]
-*     summary: Enregistre un utilisateur
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/User'
-*     responses:
-*       201:
-*         description: Utilisateur créé
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/User'
-*       400:
-*         description: Utilisateur existe déjà
-*/
+ * @swagger
+ * /users/register:
+ *   post:
+ *     tags: [Users]
+ *     summary: Enregistre un utilisateur
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       201:
+ *         description: Utilisateur créé
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       400:
+ *         description: Utilisateur existe déjà
+ */
 router.post("/register", userController.register);
 /**
+ * @swagger
+ * /users/login:
+ *   post:
+ *     tags: [Users]
+ *     summary: Connecte un utilisateur
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Connexion réussie
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *       400:
+ *         description: Email ou mot de passe incorrect
+ */
+router.post("/login", userController.login);
+/**
+ * @swagger
+ * /users/logout:
+ *   post:
+ *     tags: [Users]
+ *     summary: Déconnecte un utilisateur
+ *     responses:
+ *       200:
+ *         description: Déconnexion réussie
+ */
+router.post("/logout", userController.logout);
+
+// <------------------ Section Routes sans documentation swagger ------------------->
+/**
 * @swagger
-* /users/login:
-*   post:
-*     tags: [Users] 
-*     summary: Connecte un utilisateur
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             type: object
-*             properties:
-*               email:
-*                 type: string
-*               password:
-*                 type: string
+* /users/info/{email}:
+*   get:
+*     tags: [Users]
+*     summary: Récupère les informations d'un utilisateur
+*     parameters:
+*       - in: path
+*         name: email
+*         required: true
+*         schema:
+*           type: string
+*         description: Email de l'utilisateur
 *     responses:
 *       200:
-*         description: Connexion réussie
+*         description: Informations récupérées avec succès
 *         content:
 *           application/json:
 *             schema:
 *               type: object
 *               properties:
-*                 token:
+*                 first_name:
+*                   type: string
+*                 last_name:
+*                   type: string
+*                 address:
+*                   type: string
+*                 city:
+*                   type: string
+*                 state:
+*                   type: string
+*                 zip:
+*                   type: string
+*                 email:
 *                   type: string
 *       400:
-*         description: Email ou mot de passe incorrect
+*         description: Utilisateur non trouvé
+*       500:
+*         description: Erreur serveur
 */
-router.post("/login", userController.login);
-/**
-* @swagger
-* /users/logout:
-*   post:
-*     tags: [Users]
-*     summary: Déconnecte un utilisateur
-*     responses:
-*       200:
-*         description: Déconnexion réussie
-*/
-router.post("/logout", userController.logout);
+router.get("/info/:email", userController.getUserInfo);
 
 // <------------------ Exportation du module ------------------->
 module.exports = router;

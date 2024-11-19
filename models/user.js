@@ -19,77 +19,77 @@ const sequelize = require("../config/dbConfig"); // Importation de la connexion 
 const { DataTypes } = require("sequelize"); // Importation du module sequelize
 
 // <------------------ Création du modèle User ------------------->
-const User = sequelize.define("users", {
-  id: {
-    autoIncrement: true,
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true
-  },
-  first_name: {
-    type: DataTypes.STRING(50),
-    allowNull: false
-  },
-  last_name: {
-    type: DataTypes.STRING(50),
-    allowNull: false
-  },
-  address: {
-    type: DataTypes.STRING(150),
-    allowNull: false
-  },
-  city: {
-    type: DataTypes.STRING(70),
-    allowNull: false
-  },
-  state: {
-    type: DataTypes.STRING(30),
-    allowNull: false
-  },
-  zip: {
-    type: DataTypes.STRING(7),
-    allowNull: false
-  },
-  email: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-    unique: "Email"
-  },
-  password: {
-    type: DataTypes.STRING(255),
-    allowNull: false
-  }, 
-  type: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-    defaultValue: "user"
-  },
-  status: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false
-  },
-}, {
-  sequelize,
-  tableName: "users",
-  indexes: [
-    {
-      name: "PRIMARY",
-      unique: true,
-      using: "BTREE",
-      fields: [
-        { name: "id" },
-      ]
+const User = sequelize.define(
+  "users",
+  {
+    id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
     },
-    {
-      name: "email",
-      unique: true,
-      using: "BTREE",
-      fields: [
-        { name: "email" },
-      ]
+    first_name: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
     },
-  ]
-});
+    last_name: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    address: {
+      type: DataTypes.STRING(150),
+      allowNull: false,
+    },
+    city: {
+      type: DataTypes.STRING(70),
+      allowNull: false,
+    },
+    state: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
+    },
+    zip: {
+      type: DataTypes.STRING(7),
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      unique: "Email",
+    },
+    password: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    type: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: "user",
+    },
+    status: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+    tableName: "users",
+    indexes: [
+      {
+        name: "PRIMARY",
+        unique: true,
+        using: "BTREE",
+        fields: [{ name: "id" }],
+      },
+      {
+        name: "email",
+        unique: true,
+        using: "BTREE",
+        fields: [{ name: "email" }],
+      },
+    ],
+  }
+);
 
 // <------------------ Exportation du modèle User ------------------->
 module.exports = User;
