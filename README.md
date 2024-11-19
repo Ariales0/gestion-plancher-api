@@ -66,7 +66,11 @@ Remplacez les valeurs par celles qui correspondent à votre configuration.
 ## Lancer le service
 
 ```bash
-node index.js
+node app.js
+
+ou
+
+npm start
 ```
 
 ## Utilisation
@@ -74,6 +78,8 @@ node index.js
 Une fois l'API démarrée, vous pouvez envoyer des requêtes HTTP à `http://localhost:3000`
 
 ## Documentation de l'API
+
+Accéder à la documentation de l'api via `http://localhost:3000/api-docs`
 
 ## Collaboration
 
