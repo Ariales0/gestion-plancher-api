@@ -11,8 +11,6 @@ const brokerController = require('../controllers/brokerController');
 *     Broker:
 *       type: object
 *       properties:
-*         id:
-*           type: integer
 *         name:
 *           type: string
 *         ipv4:

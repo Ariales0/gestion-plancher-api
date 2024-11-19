@@ -27,8 +27,6 @@ const userController = require("../controllers/userController"); // Importation 
 *     User:
 *       type: object
 *       properties:
-*         id:
-*           type: integer
 *         first_name:
 *           type: string
 *         last_name:

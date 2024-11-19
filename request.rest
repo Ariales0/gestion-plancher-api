@@ -10,15 +10,15 @@ GET  http://{{host}}/
 POST http://{{host}}/users/register
 Content-Type: {{contentType}}
 {
-  "FirstName": "John",
-  "LastName": "Doe",
-  "Address": "123 Main St",
-  "City": "Anytown",
-  "State": "CA",
-  "Zip": "12345",
-  "Country": "USA",
-  "Email": "test@example.com",
-  "Password": "test"
+ "first_name": "John",
+ "last_name": "Doe", 
+ "address": "123 Main St",
+ "city": "Anytown",
+ "state": "CA",
+ "zip": "12345",
+ "email": "test@example.com",
+ "password": "test",
+ "type": "user"
 }
 
 ### Requête de connexion
@@ -26,6 +26,6 @@ POST http://{{host}}/users/login
 Content-Type: {{contentType}}
 
 {
-  "Email": "john.dan@example.com",
-  "Password": "securePassword123"
+  "email": "john.dan@example.com",
+  "password": "securePassword123"
 }
