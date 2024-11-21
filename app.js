@@ -24,12 +24,14 @@ const thermostatRoutes = require("./routes/thermostatRoutes"); // Importation de
 const swaggerJSDoc = require("swagger-jsdoc"); // Importation du module swagger-jsdoc
 const swaggerUi = require("swagger-ui-express"); // Importation du module swagger-ui-express
 const { initAssociations } = require("./models/association"); // Importation des associations
+const cors = require('cors'); // Importation de CORS
 
 // <----------- Section configuration ------------->
 const port = process.env.PORT; // Configuration du port
 const environment = process.env.NODE_ENV; // Configuration de l'environnement
 const app = express(); // Création de l'application express
 app.use(express.json()); // Utilisation du middleware pour comprendre les requêtes en JSON
+app.use(cors()); // Utilisation de CORS
 
 // <-----------Section base de données------------->
 // === Tester la connexion à la base de données ===
