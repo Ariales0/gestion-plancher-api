@@ -151,7 +151,40 @@ router.post("/login", userController.login);
  */
 router.post("/logout", userController.logout);
 
-// <------------------ Section Routes sans documentation swagger ------------------->
+/**
+* @swagger
+* /users/getAll:
+*   post:
+*     tags: [Users]
+*     summary: Récupère tous les utilisateurs
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               appToken:
+*                 type: string
+*     responses:
+*       200:
+*         description: Liste des utilisateurs récupérée
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 users:
+*                   type: array
+*                   items:
+*                     $ref: '#/components/schemas/User'
+*       401:
+*         description: Token invalide
+*       500:
+*         description: Erreur serveur
+*/
+router.post("/getAll", userController.getAllUsers)
+
 /**
 * @swagger
 * /users/info/{email}:

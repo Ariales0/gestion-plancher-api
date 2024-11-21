@@ -175,6 +175,38 @@ exports.logout = async function (req, res) {
   }
 };
 
+// <------------------ Fonction récupération des utilisateur ------------------->
+exports.getAllUsers = async (req, res) => {
+  try {
+    const { appToken } = req.body;
+ 
+    if (!appToken) {
+      return res.status(400).json({
+        error: "Token d'application requis ❌"
+      });
+    }
+ 
+    if (!jwt.verifyApplicationToken(appToken)) {
+      return res.status(401).json({
+        error: "Token d'application invalide ⛔"
+      });
+    }
+ 
+    const users = await User.findAll();
+    
+    return res.status(200).json({
+      message: "Liste des utilisateurs récupérée avec succès ✅",
+      users: users
+    });
+ 
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: "Erreur lors de la récupération des utilisateurs ❌"
+    });
+  }
+ };
+
 // <------------------ Fonction récupération des infos utilisateur ------------------->
 exports.getUserInfo = async function (req, res) {
   try {
