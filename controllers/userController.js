@@ -148,6 +148,13 @@ exports.login = async function (req, res) {
       return res.status(400).json({ error: "Mot de passe incorrect ❌" });
     }
 
+    if (!user.status) {
+      return res.status(403).json({
+        error: "Votre compte n'est pas activé ⛔",
+        message: "Veuillez contacter l'administrateur"
+      });
+     }
+
     const accessToken = jwt.generateAccessToken(user.email);
     res
       .status(200)
