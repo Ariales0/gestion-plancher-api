@@ -1,3 +1,18 @@
+/*
+ * ============================================================================
+ * File: userRoutes.js
+ * Project: Gestion plancher
+ * Created Date: 19/09/2024
+ * Author: Lyes Hamrani
+ * -----
+ * Last Modified: 21/11/2024
+ * Modified By: Lyes Hamrani
+ * -----
+ * Copyright (c) 2024 Lyes Hamrani, Quentin Lecourt, Steve Lepage
+ * ============================================================================
+ * Description: Routes broker
+ * ============================================================================
+ */
 //<------------------ Section Importation des modules ------------------->
 const express = require("express");
 const router = express.Router();

@@ -5,7 +5,7 @@
  * Created Date: 19/09/2024
  * Author: Lyes Hamrani
  * -----
- * Last Modified: 24/09/2024
+ * Last Modified: 21/11/2024
  * Modified By: Lyes Hamrani
  * -----
  * Copyright (c) 2024 Lyes Hamrani, Quentin Lecourt, Steve Lepage
@@ -50,6 +50,40 @@ const userController = require("../controllers/userController"); // Importation 
  *           type: boolean
  *           default: true
  */
+
+/**
+* @swagger
+* /users/getAppToken:
+*   post:
+*     tags: [Users]
+*     summary: Récupère un token d'application
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               email:
+*                 type: string
+*               password :
+*                 type: string
+*     responses:
+*       200:
+*         description: Token généré avec succès
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 AppToken:
+*                   type: string
+*       401:
+*         description: Accès non autorisé
+*       400:
+*         description: Données manquantes
+*/
+router.post("/getAppToken", userController.getAppToken);
 
 /**
  * @swagger
@@ -159,6 +193,60 @@ router.post("/logout", userController.logout);
 *         description: Erreur serveur
 */
 router.get("/info/:email", userController.getUserInfo);
+
+/**
+* @swagger
+* /users/activate:
+*   post:
+*     tags: [Users] 
+*     summary: Active un compte utilisateur
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               email:
+*                 type: string
+*               appToken:
+*                 type: string
+*     responses:
+*       200:
+*         description: Compte activé avec succès
+*       401:
+*         description: Token invalide
+*       404:
+*         description: Utilisateur non trouvé
+*/
+router.post("/activate", userController.activateAccount);
+
+/**
+* @swagger
+* /users/deactivate:
+*   post:
+*     tags: [Users]
+*     summary: Désactive un compte utilisateur
+*     requestBody:
+*       required: true 
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               email:
+*                 type: string
+*               appToken:
+*                 type: string
+*     responses:
+*       200:
+*         description: Compte désactivé avec succès
+*       401:
+*         description: Token invalide
+*       404:
+*         description: Utilisateur non trouvé
+*/
+router.post("/deactivate", userController.deactivateAccount);
 
 // <------------------ Exportation du module ------------------->
 module.exports = router;
